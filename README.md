@@ -6,25 +6,32 @@ Source extracted unchanged from [OmniRoute `release/v3.8.51`](https://github.com
 
 ## Install
 
+Until OpenCode v2 package plugins can install this package cleanly, install the zero-dependency sync entrypoint:
+
 ```sh
-npm install @piyush97/opencode-omniroute-v2
+mkdir -p ~/.config/opencode/plugins
+curl -fsSL https://raw.githubusercontent.com/piyush97/opencode-omniroute-v2/main/plugin.js \
+  -o ~/.config/opencode/plugins/omniroute-v2.js
 ```
 
-`opencode.json`:
+Connect your `omniroute` credential with OpenCode, then add the provider shell to `~/.config/opencode/opencode.json`:
 
 ```json
 {
-  "plugins": [
-    {
-      "package": "@piyush97/opencode-omniroute-v2",
-      "options": {
-        "providerId": "omniroute",
-        "baseURL": "http://localhost:20128"
-      }
+  "$schema": "https://opencode.ai/config.json",
+  "model": "omniroute/auto/best-coding",
+  "providers": {
+    "omniroute": {
+      "name": "OmniRoute",
+      "package": "@opencode/ai/providers/openai-compatible",
+      "settings": { "baseURL": "https://9router.piyushmehta.com/v1" },
+      "models": {}
     }
-  ]
+  }
 }
 ```
+
+The plugin fetches `/v1/models` on OpenCode startup and updates that provider catalog only when it changed.
 
 ## Credentials
 
