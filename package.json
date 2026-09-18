@@ -9,10 +9,12 @@
     ".": {
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
-    }
+    },
+    "./sync": "./plugin.js"
   },
   "files": [
     "dist",
+    "plugin.js",
     "README.md",
     "LICENSE"
   ],
